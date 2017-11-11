@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.vic</groupId>
+		<artifactId>user-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		
+		<!-- 继承是绝对路径的pom文件 -->
+		<relativePath>../user-parent/pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>user-service</artifactId>
+	<packaging>jar</packaging>
+
+	<name>user-service</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+		<!-- 
+			user-core依赖log4j-api 1.9.1
+			同层次时，谁先定义先使用谁
+		 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>user-core</artifactId>
+			<version>${project.version}</version>
+			<!-- 我TM就得使用log4j-api 1.9.0，使用exclusions标签即可 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+			
+		</dependency>
+		
+		<!-- 
+			user-core依赖log4j-api 1.9.0
+		 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>user-log</artifactId>
+			<!-- 内置变量, project.xxx -->
+			<version>${project.version}</version>
+		</dependency>
+		
+	</dependencies>
+</project>
